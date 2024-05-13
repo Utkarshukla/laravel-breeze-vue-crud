@@ -17,7 +17,7 @@ class PostController extends Controller
      */
     public function index() : Response
     {
-        $posts= Post::with('categoryList')->paginate(10);
+        $posts= Post::with('categoryList')->with('postAuthor')->paginate(10);
         return Inertia::render('Welcome', [
            'posts'=>$posts,
            'postRoute' => route('posts.show', ['post' => '__post_id__']),
@@ -49,7 +49,7 @@ class PostController extends Controller
      */
     public function show(string $post)
     {
-        $post = Post::with('categoryList')->findOrFail($post);
+        $post = Post::with('categoryList')->with('postAuthor')->with('comments')->findOrFail($post);
         return Inertia::render('Post',[
             'post'=>$post,
             'canLogin' => Route::has('login'),

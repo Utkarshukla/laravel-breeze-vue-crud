@@ -64,28 +64,32 @@ function handleImageError() {
                             Log in
                             </Link>
 
-                            <Link v-if="canRegister" :href="route('register')"
+                            <!-- <Link v-if="canRegister" :href="route('register')"
                                 class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white">
                             Register
-                            </Link>
+                            </Link> -->
                         </template>
                     </nav>
                 </header>
 
                 <main class="mt-6">
                     <div class="grid gap-6 lg:grid-cols-2 lg:gap-8">
-                        Utkarsh Shukla Blogs
+                        Prarang Blogs
 
                     </div>
-                    <div v-for="post in posts.data" :key="post.id" class="bg-white rounded-lg shadow-md p-6">
-
-                        <h2 class="text-xl font-semibold">{{ post.title }}</h2>
-                        <p class="text-gray-500">{{ post.short_description }}</p>
+                    
+                    <div v-for="post in posts.data" :key="post.id" class="bg-gradient-to-br from-gray-300 to-white rounded-lg shadow-md p-6">
                         <Link :href="postRoute.replace('__post_id__', post.id)">
-                            <img :src="url('/storage/'.post.thumbnail)"  alt="Thumbnail" class="mt-4 rounded-lg" >
+                            <img :src="'http://127.0.0.1:8000/storage/' + post.thumbnail"
+                                                alt="Thumbnail" class="mt-4 w-1/1 p-5 rounded-lg" >
                         </Link>
+                        <Link :href="postRoute.replace('__post_id__', post.id)">
+                            <h2 class="text-xl font-semibold text-pink-500 hover:text-pink-700">{{ post.title }}</h2>
+                        </Link>
+                        <p class="text-gray-500">{{ post.short_description }}</p>
+                        
                        <p class="mt-4 text-sm text-gray-400">Category: {{ post.category_list.category }}</p>
-                        <p class="mt-2 text-sm text-gray-400">Author: {{ post.author }}</p>
+                        <p class="mt-2 text-sm text-gray-400">Author: {{ post.post_author.name}}</p>
                         <p class="mt-2 text-sm text-gray-400">Created At: {{ post.created_at }}</p>
                     </div>
                     <Pagination :data="posts"/>

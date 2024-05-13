@@ -1,5 +1,5 @@
 <script setup>
-import { Head, Link, usePage } from '@inertiajs/vue3';
+import { Head, Link, usePage, useForm } from '@inertiajs/vue3';
 import Pagination from '@/Components/Pagination.vue';
 defineProps({
     post: {
@@ -18,6 +18,23 @@ function handleImageError() {
     document.getElementById('background')?.classList.add('!hidden');
 }
 // console.log(usePage().props.posts);
+
+const commentForm= useForm({
+     'id':0,
+    'content':''
+});
+const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('en-US', { timeZone: 'UTC' });
+};
+const submitComment = (id) => {
+    
+    commentForm.id= id;
+    console.log(commentForm);
+    commentForm.post(route('post.comment'),{
+        preserveScroll:true
+    });
+};
 </script>
 
 <template>
@@ -63,15 +80,35 @@ function handleImageError() {
                         Utkarsh Shukla Blogs
 
                     </div>
-                    <div :key="post.id" class="bg-white rounded-lg shadow-md p-6">
+                    <div :key="post.id" class="bg-gradient-to-br from-gray-300 to-white rounded-lg shadow-md p-6">
 
-                        <h2 class="text-xl font-semibold">{{ post.title }}</h2>
+                        <h2 class="text-xl font-semibold text-gray-500">{{ post.title }}</h2>
                         <p class="text-gray-500">{{ post.short_description }}</p>
                         <img :src="'http://127.0.0.1:8000/storage/' + post.thumbnail" alt="Thumbnail" class="mt-4 rounded-lg">
                         <p class="text-gray-500">{{post.long_description}}</p>
                         <p class="mt-4 text-sm text-gray-400">Category: {{ post.category_list.category }}</p>
-                        <p class="mt-2 text-sm text-gray-400">Author: {{ post.author }}</p>
+                        <p class="mt-2 text-sm text-gray-400">Author: {{ post.post_author.name}}</p>
                         <p class="mt-2 text-sm text-gray-400">Created At: {{ post.created_at }}</p>
+
+                        <div class="mt-2 text-sm text-gray-400" v-for=" comment in post.comments">
+                            
+                            <div class="mr-4">
+                                    <img src="https://thumbs.dreamstime.com/b/vector-illustration-avatar-dummy-logo-collection-image-icon-stock-isolated-object-set-symbol-web-137160339.jpg" alt="User Avatar" class="w-12 h-12 rounded-full">
+                             </div>
+                            <div class="flex-grow">
+                            <div class="flex items-center mb-1">
+                            <span class="font-bold text-gray-800">User{{ comment.id }}</span>
+                            <span class="text-xs text-gray-500 ml-2">{{ formatDate(comment.created_at) }}</span>
+                            </div>
+                            <p class="text-gray-700">{{ comment.content }}</p>
+
+                            </div>
+                        </div>
+                        <form class="mt-4" @submit.prevent="submitComment(post.id)">
+                         <textarea v-model="commentForm.content" rows="3" class="w-full p-2 border text-blue-950 border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm block" placeholder="Write your comment here..." required></textarea>
+                            <button type="submit" class="mt-2 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Post Comment</button>
+                        </form>
+
                     </div>
                     <!-- <Pagination :data="posts"/> -->
                 </main>

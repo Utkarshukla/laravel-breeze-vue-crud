@@ -3,6 +3,12 @@ Steps to run this project
 ## Description
 
 Larave crud opration with breeze+inertia+vue
+## Task Completed
+Listing of blogs
+Single Blog page
+Comment Functionality 
+
+Admin Pannel with Create update and delete
 
 
 ## Getting Started
@@ -43,6 +49,11 @@ npm run dev
 & second terminal> 
 ```bash
 php artisan serve
+```
+
+Email & Password Same:
+```bash
+ram@gmail.com
 ```
 
 ██████╗ ██╗ ██╗███████╗███╗ ███╗███████╗

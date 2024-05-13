@@ -58,8 +58,7 @@ class AdminController extends Controller
     $validatedData['author']= Auth::id();
      Post::create($validatedData);
 
-    // Redirect to wherever you need after saving
-    $category=Category::all();
+  return redirect()->route('dashboard');
     
     
 }
@@ -93,7 +92,7 @@ class AdminController extends Controller
         'title' => 'required',
         'short_description' => 'required',
         'long_description' => 'required',
-        'thumbnail' => 'nullable|mimes:png,jpg,jpeg,avif,webp',
+        // 'thumbnail' => 'nullable|mimes:png,jpg,jpeg,avif,webp',
         'category_id' => 'required',
     ]);
     
