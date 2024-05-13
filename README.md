@@ -23,11 +23,24 @@ Clone the repository:
 
 ```bash
 git clone https://github.com/your-username/project-name.git
-
-1. run> composer update
-2. run> php artisan migrate
-3. >php artisan db:seed
-4. >npm run dev & second terminal> php artisan serve
+```
+run commands step by step:
+```bash
+composer update
+```
+```bash
+php artisan migrate
+```
+```bash
+php artisan db:seed
+```
+```bash
+npm run dev 
+```
+& second terminal> 
+```bash
+php artisan serve
+```
 
 ██████╗ ██╗ ██╗███████╗███╗ ███╗███████╗
 ██╔═══██╗██║ ██║██╔════╝████╗ ████║██╔════╝
