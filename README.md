@@ -35,6 +35,9 @@ php artisan migrate
 php artisan db:seed
 ```
 ```bash
+npm install
+```
+```bash
 npm run dev 
 ```
 & second terminal> 
