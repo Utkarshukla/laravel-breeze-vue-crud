@@ -32,7 +32,8 @@ const submitComment = (id) => {
     commentForm.id= id;
     console.log(commentForm);
     commentForm.post(route('post.comment'),{
-        preserveScroll:true
+        preserveScroll:true,
+        onSuccess: () => commentForm.reset(),
     });
 };
 </script>
