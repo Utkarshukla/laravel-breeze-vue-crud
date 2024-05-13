@@ -22,7 +22,7 @@ Follow these instructions to get a copy of the project up and running on your lo
 Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/project-name.git
+git clone https://github.com/Utkarshukla/laravel-breeze-vue-crud.git
 ```
 run commands step by step:
 ```bash
